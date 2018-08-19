@@ -11,40 +11,43 @@ using fty = MainFactory;
 
 namespace MainAPI.Controllers
 {
+    [RoutePrefix("api/Device")]
     public class DeviceController : ApiController
     {
-        mgr.IDevice dev= null;
+        mgr.IDevice dev = null;
         public DeviceController()
         {
-            dev = (mgr.IDevice)fty.Facade.GetDeviceInstance();
+            dev = fty.Facade.GetDeviceInstance();
         }
-      
-        [HttpPost]
 
+        [HttpPost]
+        [Route("Register")]
         public IHttpActionResult RegisterDevice(DeviceInformation oData)
         {
 
             return Ok(dev.RegisterDevice(oData));
 
         }
-        [HttpPost]
 
+        [HttpPost]
+        [Route("Config")]
         public IHttpActionResult SendConfiguration(Configuration oData)
         {
 
             return Ok(dev.SendConfiguration(oData));
 
         }
-        [HttpPost]
 
+        [HttpPost]
         public IHttpActionResult GetDataFromDevice(DataFromDevice oData)
         {
 
             return Ok(dev.GetDataFromDevice(oData));
 
         }
-        [HttpGet]
 
+        [HttpGet]
+        [Route("Token")]
         public IHttpActionResult GetSASToken(string oData)
         {
 
